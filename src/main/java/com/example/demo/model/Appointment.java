@@ -20,18 +20,8 @@ public class Appointment {
     private String purpose;
     private String status;
 
-    // Required by JPA
+    // JPA-required no-args constructor
     public Appointment() {
-    }
-
-    // Business constructor (no id)
-    public Appointment(Visitor visitor, Host host,
-                       LocalDate appointmentDate, String purpose, String status) {
-        this.visitor = visitor;
-        this.host = host;
-        this.appointmentDate = appointmentDate;
-        this.purpose = purpose;
-        this.status = status;
     }
 
     @PrePersist

@@ -34,21 +34,13 @@ public class Host {
     public void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
+    
+public Host() {
+}
+
 
     public Long getId() {
         return id;
-    }
-public Host(){
-
-}
-    public Host( String hostName, String fullname, String email, String department, String phone) {
-       
-        this.hostName = hostName;
-        this.fullname = fullname;
-        this.email = email;
-        this.department = department;
-        this.phone = phone;
-        
     }
 
     public void setId(Long id) {
@@ -102,6 +94,4 @@ public Host(){
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-
-    
 }
