@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.Host;
 
 @Repository
-public interface HostRepo extends JpaRepository<Host, Long> {
+public interface HostRepository extends JpaRepository<Host, Long> {
 }

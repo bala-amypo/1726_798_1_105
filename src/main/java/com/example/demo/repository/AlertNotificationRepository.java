@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.AlertNotification;
 
 @Repository
-public interface AlertNotificationRepo extends JpaRepository<AlertNotification, Long> {
+public interface AlertNotificationRepository extends JpaRepository<AlertNotification, Long> {
 }
