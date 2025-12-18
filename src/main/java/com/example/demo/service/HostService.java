@@ -4,10 +4,7 @@ import java.util.List;
 import com.example.demo.model.Host;
 
 public interface HostService {
-
-    Host createHost(Host host);
-
-    Host getHost(Long id);
-
-    List<Host> getAllHosts();
+    Host save(Host host);
+    List<Host> getAll();
+    Host getById(Long id);
 }

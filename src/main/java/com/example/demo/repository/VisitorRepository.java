@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.Visitor;
 
 @Repository
-public interface VisitorRepo extends JpaRepository<Visitor, Long> {
+public interface VisitorRepository extends JpaRepository<Visitor, Long> {
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.VisitLog;
 
 @Repository
-public interface VisitLogRepo extends JpaRepository<VisitLog, Long> {
+public interface VisitLogRepository extends JpaRepository<VisitLog, Long> {
 
     List<VisitLog> findByCheckOutTimeIsNull();
 }
