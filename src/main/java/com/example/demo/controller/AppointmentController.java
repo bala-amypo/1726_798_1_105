@@ -18,11 +18,14 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     @PostMapping("/{visitorId}/{hostId}")
-    public Appointment createAppointment(
-            @PathVariable Long visitorId,
-            @PathVariable Long hostId) {
-        return appointmentService.create(visitorId, hostId);
-    }
+public Appointment createAppointment(
+        @PathVariable Long visitorId,
+        @PathVariable Long hostId,
+        @RequestBody Appointment appointment) {
+
+    return appointmentService.create(visitorId, hostId, appointment);
+}
+
 
     @GetMapping("/host/{hostId}")
     public List<Appointment> getByHost(@PathVariable Long hostId) {
