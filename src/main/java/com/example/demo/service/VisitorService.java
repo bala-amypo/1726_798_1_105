@@ -8,4 +8,3 @@ public interface VisitorService {
     List<Visitor> getAll();
     Visitor getById(Long id);
 }
-
