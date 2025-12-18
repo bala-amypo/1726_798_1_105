@@ -2,7 +2,6 @@ package com.example.demo.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.AlertNotification;
@@ -14,11 +13,15 @@ import com.example.demo.service.AlertNotificationService;
 @Service
 public class AlertNotificationServiceImpl implements AlertNotificationService {
 
-    @Autowired
-    AlertNotificationRepository alertRepository;
+    private final AlertNotificationRepository alertNotificationRepository;
+    private final VisitLogRepository visitLogRepository;
 
-    @Autowired
-    VisitLogRepository visitLogRepository;
+    public AlertNotificationServiceImpl(
+            AlertNotificationRepository alertNotificationRepository,
+            VisitLogRepository visitLogRepository) {
+        this.alertNotificationRepository = alertNotificationRepository;
+        this.visitLogRepository = visitLogRepository;
+    }
 
     @Override
     public AlertNotification sendAlert(Long visitLogId) {
@@ -31,23 +34,23 @@ public class AlertNotificationServiceImpl implements AlertNotificationService {
 
         AlertNotification alert = new AlertNotification();
         alert.setVisitLog(log);
-        alert.setAlertMessage("Visitor Alert");
+        alert.setAlertMessage("Visitor arrived");
         alert.setSentTo("HOST");
 
         log.setAlertSent(true);
         visitLogRepository.save(log);
 
-        return alertRepository.save(alert);
+        return alertNotificationRepository.save(alert);
     }
 
     @Override
-    public AlertNotification getAlert(Long id) {
-        return alertRepository.findById(id)
+    public AlertNotification getById(Long id) {
+        return alertNotificationRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Alert not found"));
     }
 
     @Override
-    public List<AlertNotification> getAllAlerts() {
-        return alertRepository.findAll();
+    public List<AlertNotification> getAll() {
+        return alertNotificationRepository.findAll();
     }
 }
