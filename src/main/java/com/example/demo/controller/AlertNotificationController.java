@@ -23,7 +23,7 @@ public class AlertNotificationController {
     }
 
     @GetMapping("/{id}")
-    public Optional<AlertNotification> getAlert(@PathVariable Long id) {
+    public AlertNotification getAlert(@PathVariable Long id) {
         return alertService.getById(id);
     }
 
