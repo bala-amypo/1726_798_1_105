@@ -1,23 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.model.User;
-
-public interface UserService {
-
-    User register(User user);
-
-    String package com.example.demo.service;
-
-import com.example.demo.model.AlertNotification;
 import java.util.List;
+import com.example.demo.model.AlertNotification;
 
 public interface AlertNotificationService {
 
     AlertNotification sendAlert(Long visitLogId);
 
-    AlertNotification getAlert(Long id);
+    AlertNotification getById(Long id);
 
-    List<AlertNotification> getAllAlerts();
-}
-login(String email, String password);
+    List<AlertNotification> getAll();
 }
