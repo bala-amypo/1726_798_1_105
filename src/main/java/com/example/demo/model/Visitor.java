@@ -26,7 +26,6 @@ public class Visitor {
 
     private LocalDateTime createdAt;
 
-    // Required by JPA
     public Visitor() {
     }
 
@@ -38,7 +37,7 @@ public class Visitor {
         this.createdAt = createdAt;
     }
 
-    // Getters & Setters
+    
     public Long getId() {
         return id;
     }
