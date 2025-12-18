@@ -28,7 +28,7 @@ public class VisitorController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Visitor> getVisitor(@PathVariable Long id) {
+    public Visitor getVisitor(@PathVariable Long id) {
         return visitorService.getById(id);
     }
 }

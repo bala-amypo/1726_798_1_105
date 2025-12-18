@@ -28,7 +28,7 @@ public class HostController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Host> getHost(@PathVariable Long id) {
+    public Host getHost(@PathVariable Long id) {
         return hostService.getById(id);
     }
 }

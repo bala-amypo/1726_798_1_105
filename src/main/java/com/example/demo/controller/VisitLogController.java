@@ -35,7 +35,7 @@ public class VisitLogController {
     }
 
     @GetMapping("/{id}")
-    public Optional<VisitLog> getVisit(@PathVariable Long id) {
+    public VisitLog getVisit(@PathVariable Long id) {
         return visitLogService.getById(id);
     }
 }

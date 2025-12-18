@@ -35,7 +35,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Appointment> getAppointment(@PathVariable Long id) {
+    public Appointment getAppointment(@PathVariable Long id) {
         return appointmentService.getById(id);
     }
 }
