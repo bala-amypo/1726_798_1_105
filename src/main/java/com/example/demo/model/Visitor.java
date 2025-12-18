@@ -1,12 +1,7 @@
 package com.example.demo.model;
 
 import java.time.LocalDateTime;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
 @Entity
 public class Visitor {
@@ -26,18 +21,17 @@ public class Visitor {
 
     private LocalDateTime createdAt;
 
+    // Required by JPA
     public Visitor() {
     }
 
-    public Visitor(Long id, String email, String phone, String idProofNumber, LocalDateTime createdAt) {
-        this.id = id;
-        this.email = email;
-        this.phone = phone;
-        this.idProofNumber = idProofNumber;
-        this.createdAt = createdAt;
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
 
-    
+    // Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -72,9 +66,5 @@ public class Visitor {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }
