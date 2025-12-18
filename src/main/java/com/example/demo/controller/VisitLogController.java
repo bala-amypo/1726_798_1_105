@@ -17,12 +17,13 @@ public class VisitLogController {
     @Autowired
     private VisitLogService visitLogService;
 
-    @PostMapping("/checkin/{visitorId}/{hostId}")
-    public VisitLog checkIn(
-            @PathVariable Long visitorId,
-            @PathVariable Long hostId) {
-        return visitLogService.checkIn(visitorId, hostId);
-    }
+    @PostMapping("/checkin")
+public VisitLog checkIn(@RequestParam Long visitorId,
+                        @RequestParam Long hostId,
+                        @RequestParam String purpose) {
+    return visitLogService.checkIn(visitorId, hostId, purpose);
+}
+
 
     @PostMapping("/checkout/{visitLogId}")
     public VisitLog checkOut(@PathVariable Long visitLogId) {
