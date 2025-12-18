@@ -2,7 +2,6 @@ package com.example.demo.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Host;
@@ -12,22 +11,25 @@ import com.example.demo.service.HostService;
 @Service
 public class HostServiceImpl implements HostService {
 
-    @Autowired
-    HostRepository hostRepository;
+    private final HostRepository hostRepository;
+
+    public HostServiceImpl(HostRepository hostRepository) {
+        this.hostRepository = hostRepository;
+    }
 
     @Override
-    public Host createHost(Host host) {
+    public Host save(Host host) {
         return hostRepository.save(host);
     }
 
     @Override
-    public Host getHost(Long id) {
-        return hostRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Host not found"));
+    public List<Host> getAll() {
+        return hostRepository.findAll();
     }
 
     @Override
-    public List<Host> getAllHosts() {
-        return hostRepository.findAll();
+    public Host getById(Long id) {
+        return hostRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Host not found"));
     }
 }
