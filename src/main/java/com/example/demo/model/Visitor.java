@@ -21,7 +21,7 @@ public class Visitor {
 
     private LocalDateTime createdAt;
 
-    // Required by JPA
+    
     public Visitor() {
     }
 
