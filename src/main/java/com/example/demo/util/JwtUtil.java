@@ -1,8 +1,6 @@
-package com.example.demo.security;
+package com.example.demo.util;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -18,7 +16,6 @@ public class JwtUtil {
     @Value("${jwt.expiration}")
     private long expiration;
 
-    // Generate JWT Token
     public String generateToken(UserDetails userDetails) {
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
@@ -28,25 +25,20 @@ public class JwtUtil {
                 .compact();
     }
 
-    // Extract username from token
     public String extractUsername(String token) {
-        return extractClaims(token).getSubject();
+        return getClaims(token).getSubject();
     }
 
-    // Validate token
     public boolean validateToken(String token, UserDetails userDetails) {
-        String username = extractUsername(token);
-        return username.equals(userDetails.getUsername())
+        return extractUsername(token).equals(userDetails.getUsername())
                 && !isTokenExpired(token);
     }
 
-    // Check token expiration
     private boolean isTokenExpired(String token) {
-        return extractClaims(token).getExpiration().before(new Date());
+        return getClaims(token).getExpiration().before(new Date());
     }
 
-    // Extract claims
-    private Claims extractClaims(String token) {
+    private Claims getClaims(String token) {
         return Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token)
