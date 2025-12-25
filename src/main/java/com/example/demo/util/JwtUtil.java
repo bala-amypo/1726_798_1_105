@@ -20,16 +20,16 @@ public class JwtUtil {
     @Value("${jwt.expiration}")
     private long expiration;
 
-    private Key getSigningKey() {
+    private Key getKey() {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
     public String generateToken(UserDetails userDetails) {
         return Jwts.builder()
-                .subject(userDetails.getUsername())
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(getSigningKey())
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(getKey())
                 .compact();
     }
 
@@ -49,10 +49,10 @@ public class JwtUtil {
     }
 
     private Claims extractClaims(String token) {
-        return Jwts.parser()
-                .verifyWith(getSigningKey())
+        return Jwts.parserBuilder()
+                .setSigningKey(getKey())
                 .build()
-                .parseSignedClaims(token)
-                .getPayload();
+                .parseClaimsJws(token)
+                .getBody();
     }
 }
