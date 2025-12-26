@@ -13,7 +13,7 @@ public interface AppointmentService {
 
     List<Appointment> getByVisitor(Long visitorId);
 
-    // ===== required by tests =====
+    // REQUIRED BY TESTS
     Appointment createAppointment(Long visitorId, Long hostId);
 
     Appointment getAppointment(Long id);
