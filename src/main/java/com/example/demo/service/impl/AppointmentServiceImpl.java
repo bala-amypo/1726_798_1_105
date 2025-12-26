@@ -28,6 +28,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         this.hostRepository = hostRepository;
     }
 
+    // =========================
+    // EXISTING METHODS (KEEP)
+    // =========================
+
     @Override
     public Appointment create(Long visitorId, Long hostId, Appointment appointment) {
         Visitor visitor = visitorRepository.findById(visitorId)
@@ -55,5 +59,30 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<Appointment> getByVisitor(Long visitorId) {
         return appointmentRepository.findByVisitorId(visitorId);
+    }
+
+    // =========================
+    // METHODS REQUIRED BY TESTS
+    // =========================
+
+    // Test calls: createAppointment(visitorId, hostId)
+    public Appointment createAppointment(Long visitorId, Long hostId) {
+        Appointment appointment = new Appointment();
+        return create(visitorId, hostId, appointment);
+    }
+
+    // Test calls: getAppointment(id)
+    public Appointment getAppointment(Long id) {
+        return getById(id);
+    }
+
+    // Test calls: getAppointmentsForHost(hostId)
+    public List<Appointment> getAppointmentsForHost(Long hostId) {
+        return getByHost(hostId);
+    }
+
+    // Test calls: getAppointmentsForVisitor(visitorId)
+    public List<Appointment> getAppointmentsForVisitor(Long visitorId) {
+        return getByVisitor(visitorId);
     }
 }

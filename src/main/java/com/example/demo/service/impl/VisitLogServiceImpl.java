@@ -26,6 +26,10 @@ public class VisitLogServiceImpl implements VisitLogService {
     @Autowired
     private HostRepository hostRepository;
 
+    // =========================
+    // EXISTING METHODS (KEEP)
+    // =========================
+
     @Override
     public VisitLog checkIn(Long visitorId, Long hostId, String purpose) {
 
@@ -40,6 +44,7 @@ public class VisitLogServiceImpl implements VisitLogService {
         log.setHost(host);
         log.setPurpose(purpose);
         log.setAccessGranted(true);
+        log.setCheckInTime(LocalDateTime.now());
 
         return visitLogRepository.save(log);
     }
@@ -67,5 +72,29 @@ public class VisitLogServiceImpl implements VisitLogService {
     public VisitLog getById(Long id) {
         return visitLogRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("VisitLog not found"));
+    }
+
+    // =========================
+    // METHODS REQUIRED BY TESTS
+    // =========================
+
+    // Test calls: checkInVisitor(...)
+    public VisitLog checkInVisitor(Long visitorId, Long hostId, String purpose) {
+        return checkIn(visitorId, hostId, purpose);
+    }
+
+    // Test calls: checkoutVisitor(...)
+    public VisitLog checkoutVisitor(Long visitLogId) {
+        return checkOut(visitLogId);
+    }
+
+    // Test calls: getActiveVisits()
+    public List<VisitLog> getActiveVisits() {
+        return getActive();
+    }
+
+    // Test calls: getVisit(...)
+    public VisitLog getVisit(Long id) {
+        return getById(id);
     }
 }
