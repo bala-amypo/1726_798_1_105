@@ -17,10 +17,6 @@ public class VisitorServiceImpl implements VisitorService {
         this.visitorRepository = visitorRepository;
     }
 
-    // =========================
-    // EXISTING METHODS (KEEP)
-    // =========================
-
     @Override
     public Visitor save(Visitor visitor) {
         return visitorRepository.save(visitor);
@@ -37,17 +33,19 @@ public class VisitorServiceImpl implements VisitorService {
                 .orElseThrow(() -> new RuntimeException("Visitor not found"));
     }
 
-    // =========================
-    // METHODS REQUIRED BY TESTS
-    // =========================
-
-    // Test calls: createVisitor(visitor)
+    // ===== test wrappers =====
+    @Override
     public Visitor createVisitor(Visitor visitor) {
         return save(visitor);
     }
 
-    // Test calls: getVisitor(id)
+    @Override
     public Visitor getVisitor(Long id) {
         return getById(id);
+    }
+
+    @Override
+    public List<Visitor> getVisitors() {
+        return getAll();
     }
 }
