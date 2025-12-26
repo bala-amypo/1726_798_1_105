@@ -75,6 +75,12 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- REQUIRED for Java 17 + JWT -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
+
         <!-- Swagger -->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -82,7 +88,7 @@
             <version>2.3.0</version>
         </dependency>
 
-        <!-- ✅ TestNG -->
+        <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -90,7 +96,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- ❌ Spring Boot Test WITHOUT JUnit -->
+        <!-- Spring Boot Test (JUnit excluded) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -112,17 +118,19 @@
     <build>
         <plugins>
 
+            <!-- Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- ✅ Force Maven to run TestNG -->
+            <!-- Force TestNG -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
+                    <useJUnit>false</useJUnit>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
