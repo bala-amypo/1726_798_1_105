@@ -25,11 +25,12 @@ public class VisitorServiceImpl implements VisitorService {
     @Override
     public Visitor getById(Long id) {
         return visitorRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Visitor not found"));
+                .orElseThrow(() -> new RuntimeException("Visitor not found"));
     }
 
+    // 🔴 THIS METHOD WAS MISSING
     @Override
-    public List<Visitor> getAllVisitors() {
+    public List<Visitor> getAll() {
         return visitorRepository.findAll();
     }
 }
