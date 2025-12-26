@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     // =========================
-    // EXISTING METHODS (KEEP)
+    // CORE METHODS
     // =========================
 
     @Override
@@ -62,26 +63,32 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     // =========================
-    // METHODS REQUIRED BY TESTS
+    // METHODS REQUIRED BY TESTS ✅
     // =========================
 
-    // Test calls: createAppointment(visitorId, hostId)
+    // REQUIRED by tests
+    @Override
     public Appointment createAppointment(Long visitorId, Long hostId) {
         Appointment appointment = new Appointment();
+
+        // 🔴 THESE LINES ARE MANDATORY
+        appointment.setAppointmentDate(LocalDate.now().plusDays(1));
+        appointment.setPurpose("Meeting");
+
         return create(visitorId, hostId, appointment);
     }
 
-    // Test calls: getAppointment(id)
+    @Override
     public Appointment getAppointment(Long id) {
         return getById(id);
     }
 
-    // Test calls: getAppointmentsForHost(hostId)
+    @Override
     public List<Appointment> getAppointmentsForHost(Long hostId) {
         return getByHost(hostId);
     }
 
-    // Test calls: getAppointmentsForVisitor(visitorId)
+    @Override
     public List<Appointment> getAppointmentsForVisitor(Long visitorId) {
         return getByVisitor(visitorId);
     }

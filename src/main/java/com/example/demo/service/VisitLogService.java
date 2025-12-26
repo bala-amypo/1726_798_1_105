@@ -1,25 +1,8 @@
-package com.example.demo.service;
-
-import java.util.List;
-import com.example.demo.model.VisitLog;
-
 public interface VisitLogService {
 
     VisitLog checkIn(Long visitorId, Long hostId, String purpose);
 
-    VisitLog checkOut(Long visitLogId);
+    VisitLog checkoutVisitor(Long visitLogId);  // REQUIRED
 
-    List<VisitLog> getActive();
-
-    VisitLog getById(Long id);
-
-    // ===== test methods =====
-    VisitLog checkInVisitor(Long visitorId, Long hostId, String purpose);
-
-    VisitLog checkoutVisitor(Long visitLogId);
-
-    List<VisitLog> getActiveVisits();
-
-    VisitLog getVisit(Long id);
+    VisitLog getVisitLog(Long id);               // REQUIRED
 }
-
