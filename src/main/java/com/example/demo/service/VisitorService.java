@@ -9,5 +9,5 @@ public interface VisitorService {
 
     Visitor getById(Long id);
 
-    List<Visitor> getAllVisitors();   // REQUIRED
+    List<Visitor> getAll();   // 🔴 REQUIRED
 }

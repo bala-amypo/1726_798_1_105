@@ -1,5 +1,6 @@
 package com.example.demo.security;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +15,11 @@ public class JwtUtil {
     }
 
     public boolean validateToken(String token) {
+        return true;
+    }
+
+    // 🔴 REQUIRED BY JwtAuthenticationFilter
+    public boolean validateToken(String token, UserDetails userDetails) {
         return true;
     }
 }
