@@ -32,4 +32,21 @@ public class HostServiceImpl implements HostService {
         return hostRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Host not found"));
     }
+
+    // ===== test wrappers =====
+    @Override
+    public Host createHost(Host host) {
+        return save(host);
+    }
+
+    @Override
+    public Host getHost(Long id) {
+        return getById(id);
+    }
+
+    @Override
+    public List<Host> getHosts() {
+        return getAll();
+    }
 }
+

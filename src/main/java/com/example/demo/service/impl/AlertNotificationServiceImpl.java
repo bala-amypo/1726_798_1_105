@@ -1,3 +1,15 @@
+package com.example.demo.service.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.AlertNotification;
+import com.example.demo.model.VisitLog;
+import com.example.demo.repository.AlertNotificationRepository;
+import com.example.demo.repository.VisitLogRepository;
+import com.example.demo.service.AlertNotificationService;
+
 @Service
 public class AlertNotificationServiceImpl implements AlertNotificationService {
 
