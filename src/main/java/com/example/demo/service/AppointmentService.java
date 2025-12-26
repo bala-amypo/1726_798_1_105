@@ -1,11 +1,5 @@
-package com.example.demo.service;
-
-import java.util.List;
-import com.example.demo.model.Appointment;
-
 public interface AppointmentService {
 
-    // Existing methods
     Appointment create(Long visitorId, Long hostId, Appointment appointment);
 
     Appointment getById(Long id);
@@ -14,7 +8,7 @@ public interface AppointmentService {
 
     List<Appointment> getByVisitor(Long visitorId);
 
-    // ===== Methods REQUIRED by tests =====
+    // ===== required by tests =====
     Appointment createAppointment(Long visitorId, Long hostId);
 
     Appointment getAppointment(Long id);

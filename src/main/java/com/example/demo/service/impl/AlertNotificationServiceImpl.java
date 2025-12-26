@@ -1,34 +1,22 @@
-package com.example.demo.service.impl;
-
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
-import com.example.demo.model.AlertNotification;
-import com.example.demo.model.VisitLog;
-import com.example.demo.repository.AlertNotificationRepository;
-import com.example.demo.repository.VisitLogRepository;
-import com.example.demo.service.AlertNotificationService;
-
 @Service
 public class AlertNotificationServiceImpl implements AlertNotificationService {
 
-    private final AlertNotificationRepository alertNotificationRepository;
-    private final VisitLogRepository visitLogRepository;
+    private final AlertNotificationRepository alertRepo;
+    private final VisitLogRepository visitLogRepo;
 
     public AlertNotificationServiceImpl(
-            AlertNotificationRepository alertNotificationRepository,
-            VisitLogRepository visitLogRepository) {
-        this.alertNotificationRepository = alertNotificationRepository;
-        this.visitLogRepository = visitLogRepository;
+            AlertNotificationRepository alertRepo,
+            VisitLogRepository visitLogRepo) {
+        this.alertRepo = alertRepo;
+        this.visitLogRepo = visitLogRepo;
     }
 
     @Override
     public AlertNotification sendAlert(Long visitLogId) {
-        VisitLog log = visitLogRepository.findById(visitLogId)
+        VisitLog log = visitLogRepo.findById(visitLogId)
                 .orElseThrow(() -> new RuntimeException("VisitLog not found"));
 
-        if (log.getAlertSent()) {
+        if (Boolean.TRUE.equals(log.getAlertSent())) {
             throw new RuntimeException("Alert already sent");
         }
 
@@ -38,19 +26,30 @@ public class AlertNotificationServiceImpl implements AlertNotificationService {
         alert.setSentTo("HOST");
 
         log.setAlertSent(true);
-        visitLogRepository.save(log);
+        visitLogRepo.save(log);
 
-        return alertNotificationRepository.save(alert);
+        return alertRepo.save(alert);
     }
 
     @Override
     public AlertNotification getById(Long id) {
-        return alertNotificationRepository.findById(id)
+        return alertRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Alert not found"));
     }
 
     @Override
     public List<AlertNotification> getAll() {
-        return alertNotificationRepository.findAll();
+        return alertRepo.findAll();
+    }
+
+    // ===== test wrappers =====
+    @Override
+    public AlertNotification getAlert(Long id) {
+        return getById(id);
+    }
+
+    @Override
+    public List<AlertNotification> getAlerts() {
+        return getAll();
     }
 }

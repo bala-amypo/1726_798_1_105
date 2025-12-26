@@ -10,4 +10,9 @@ public interface AlertNotificationService {
     AlertNotification getById(Long id);
 
     List<AlertNotification> getAll();
+
+    // ===== required by tests =====
+    AlertNotification getAlert(Long id);
+
+    List<AlertNotification> getAlerts();
 }
