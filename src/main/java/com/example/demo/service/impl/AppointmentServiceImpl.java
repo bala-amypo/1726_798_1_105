@@ -7,6 +7,7 @@ import com.example.demo.exception.ResourceNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 
+@Service
 public class AppointmentServiceImpl implements AppointmentService {
 
     AppointmentRepository appointmentRepository;

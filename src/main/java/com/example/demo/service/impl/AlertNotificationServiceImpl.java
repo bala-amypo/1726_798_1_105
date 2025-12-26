@@ -4,9 +4,12 @@ import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import com.example.demo.service.AlertNotificationService;
 import com.example.demo.exception.ResourceNotFoundException;
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service   // ✅ ADD THIS
 public class AlertNotificationServiceImpl implements AlertNotificationService {
 
     AlertNotificationRepository alertRepository;
@@ -17,14 +20,12 @@ public class AlertNotificationServiceImpl implements AlertNotificationService {
     public AlertNotificationServiceImpl(
             AlertNotificationRepository alertRepository,
             VisitLogRepository visitLogRepository) {
-
         this.alertRepository = alertRepository;
         this.visitLogRepository = visitLogRepository;
     }
 
     @Override
     public AlertNotification sendAlert(Long visitLogId) {
-
         VisitLog log = visitLogRepository.findById(visitLogId)
                 .orElseThrow(() -> new ResourceNotFoundException("VisitLog not found"));
 
