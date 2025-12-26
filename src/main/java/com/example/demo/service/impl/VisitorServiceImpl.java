@@ -23,29 +23,13 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     @Override
-    public List<Visitor> getAll() {
-        return visitorRepository.findAll();
-    }
-
-    @Override
     public Visitor getById(Long id) {
         return visitorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Visitor not found"));
-    }
-
-    // ===== test wrappers =====
-    @Override
-    public Visitor createVisitor(Visitor visitor) {
-        return save(visitor);
+            .orElseThrow(() -> new RuntimeException("Visitor not found"));
     }
 
     @Override
-    public Visitor getVisitor(Long id) {
-        return getById(id);
-    }
-
-    @Override
-    public List<Visitor> getVisitors() {
-        return getAll();
+    public List<Visitor> getAllVisitors() {
+        return visitorRepository.findAll();
     }
 }

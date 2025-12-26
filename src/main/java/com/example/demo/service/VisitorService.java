@@ -7,14 +7,7 @@ public interface VisitorService {
 
     Visitor save(Visitor visitor);
 
-    List<Visitor> getAll();
-
     Visitor getById(Long id);
 
-    // ===== test methods =====
-    Visitor createVisitor(Visitor visitor);
-
-    Visitor getVisitor(Long id);
-
-    List<Visitor> getVisitors();
+    List<Visitor> getAllVisitors();   // REQUIRED
 }
