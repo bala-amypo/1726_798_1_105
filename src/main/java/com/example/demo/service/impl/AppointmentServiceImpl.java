@@ -6,6 +6,7 @@ import com.example.demo.service.AppointmentService;
 import com.example.demo.exception.ResourceNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {

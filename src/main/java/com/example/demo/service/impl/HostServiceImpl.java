@@ -5,7 +5,7 @@ import com.example.demo.repository.HostRepository;
 import com.example.demo.service.HostService;
 import com.example.demo.exception.ResourceNotFoundException;
 import java.util.List;
-
+import org.springframework.stereotype.Service;
 
 @Service
 public class HostServiceImpl implements HostService {
