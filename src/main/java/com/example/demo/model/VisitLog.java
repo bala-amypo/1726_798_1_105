@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -26,12 +27,18 @@ public class VisitLog {
 
     private Boolean alertSent = false;
 
-    public VisitLog() {}
+    public VisitLog() {
+    }
 
+    // Automatically set check-in time before insert
     @PrePersist
     public void onCheckIn() {
         this.checkInTime = LocalDateTime.now();
     }
+
+    // =====================
+    // GETTERS
+    // =====================
 
     public Long getId() {
         return id;
@@ -65,12 +72,21 @@ public class VisitLog {
         return alertSent;
     }
 
+    // =====================
+    // SETTERS
+    // =====================
+
     public void setVisitor(Visitor visitor) {
         this.visitor = visitor;
     }
 
     public void setHost(Host host) {
         this.host = host;
+    }
+
+    // 🔴 THIS WAS MISSING (FIX)
+    public void setCheckInTime(LocalDateTime checkInTime) {
+        this.checkInTime = checkInTime;
     }
 
     public void setCheckOutTime(LocalDateTime checkOutTime) {
