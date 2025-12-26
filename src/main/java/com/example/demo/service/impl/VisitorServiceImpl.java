@@ -1,36 +1,33 @@
 package com.example.demo.service.impl;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.example.demo.model.Visitor;
 import com.example.demo.repository.VisitorRepository;
 import com.example.demo.service.VisitorService;
+import com.example.demo.exception.ResourceNotFoundException;
+import java.util.List;
 
-@Service
 public class VisitorServiceImpl implements VisitorService {
 
-    private final VisitorRepository visitorRepository;
+    // REQUIRED field name (tests use reflection)
+    VisitorRepository visitorRepository;
 
     public VisitorServiceImpl(VisitorRepository visitorRepository) {
         this.visitorRepository = visitorRepository;
     }
 
     @Override
-    public Visitor save(Visitor visitor) {
+    public Visitor createVisitor(Visitor visitor) {
         return visitorRepository.save(visitor);
     }
 
     @Override
-    public Visitor getById(Long id) {
+    public Visitor getVisitor(Long id) {
         return visitorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Visitor not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Visitor not found"));
     }
 
-    // 🔴 THIS METHOD WAS MISSING
     @Override
-    public List<Visitor> getAll() {
+    public List<Visitor> getAllVisitors() {
         return visitorRepository.findAll();
     }
 }
