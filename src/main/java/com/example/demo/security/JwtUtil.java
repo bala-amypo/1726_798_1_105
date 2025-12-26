@@ -2,21 +2,22 @@ package com.example.demo.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import java.util.Date;
-import java.security.Key;
+import org.springframework.stereotype.Component;
 
+import java.security.Key;
+import java.util.Date;
+
+@Component   // ✅ ADD THIS
 public class JwtUtil {
 
-    // REQUIRED field names (ReflectionTestUtils)
-    private String secret;
-    private Long jwtExpirationMs;
+    private String secret = "0123456789ABCDEF0123456789ABCDEF";
+    private Long jwtExpirationMs = 3600000L;
 
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
     public String generateToken(String username, String role, Long userId, String email) {
-
         return Jwts.builder()
                 .setSubject(username)
                 .claim("role", role)
