@@ -4,11 +4,14 @@ import com.example.demo.model.Visitor;
 import com.example.demo.repository.VisitorRepository;
 import com.example.demo.service.VisitorService;
 import com.example.demo.exception.ResourceNotFoundException;
+
+import org.springframework.stereotype.Service;   // ✅ REQUIRED
+
 import java.util.List;
 
+@Service
 public class VisitorServiceImpl implements VisitorService {
 
-    // REQUIRED field name (tests use reflection)
     VisitorRepository visitorRepository;
 
     public VisitorServiceImpl(VisitorRepository visitorRepository) {
