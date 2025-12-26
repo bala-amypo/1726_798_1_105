@@ -1,44 +1,41 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.example.demo.model.Appointment;
 import com.example.demo.service.AppointmentService;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/appointments")
 public class AppointmentController {
 
-    @Autowired
-    private AppointmentService appointmentService;
+    private final AppointmentService appointmentService;
 
-    @PostMapping("/{visitorId}/{hostId}")
-public Appointment createAppointment(
-        @PathVariable Long visitorId,
-        @PathVariable Long hostId,
-        @RequestBody Appointment appointment) {
-
-    return appointmentService.create(visitorId, hostId, appointment);
-}
-
-
-    @GetMapping("/host/{hostId}")
-    public List<Appointment> getByHost(@PathVariable Long hostId) {
-        return appointmentService.getByHost(hostId);
+    public AppointmentController(AppointmentService appointmentService) {
+        this.appointmentService = appointmentService;
     }
 
-    @GetMapping("/visitor/{visitorId}")
-    public List<Appointment> getByVisitor(@PathVariable Long visitorId) {
-        return appointmentService.getByVisitor(visitorId);
+    @PostMapping("/{visitorId}/{hostId}")
+    public Appointment create(
+            @PathVariable Long visitorId,
+            @PathVariable Long hostId,
+            @RequestBody Appointment appointment) {
+
+        return appointmentService.createAppointment(visitorId, hostId, appointment);
     }
 
     @GetMapping("/{id}")
-    public Appointment getAppointment(@PathVariable Long id) {
-        return appointmentService.getById(id);
+    public Appointment get(@PathVariable Long id) {
+        return appointmentService.getAppointment(id);
+    }
+
+    @GetMapping("/host/{hostId}")
+    public List<Appointment> byHost(@PathVariable Long hostId) {
+        return appointmentService.getAppointmentsForHost(hostId);
+    }
+
+    @GetMapping("/visitor/{visitorId}")
+    public List<Appointment> byVisitor(@PathVariable Long visitorId) {
+        return appointmentService.getAppointmentsForVisitor(visitorId);
     }
 }

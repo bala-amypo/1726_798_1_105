@@ -1,34 +1,32 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.example.demo.model.Host;
 import com.example.demo.service.HostService;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/hosts")
 public class HostController {
 
-    @Autowired
-    private HostService hostService;
+    private final HostService hostService;
+
+    public HostController(HostService hostService) {
+        this.hostService = hostService;
+    }
 
     @PostMapping
-    public Host createHost(@RequestBody Host host) {
-        return hostService.save(host);
+    public Host create(@RequestBody Host host) {
+        return hostService.createHost(host);
     }
 
     @GetMapping
-    public List<Host> getAllHosts() {
-        return hostService.getAll();
+    public List<Host> getAll() {
+        return hostService.getAllHosts();
     }
 
     @GetMapping("/{id}")
-    public Host getHost(@PathVariable Long id) {
-        return hostService.getById(id);
+    public Host get(@PathVariable Long id) {
+        return hostService.getHost(id);
     }
 }
